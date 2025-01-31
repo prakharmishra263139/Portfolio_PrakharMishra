@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Personal Portfolio</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="#" class="logo">PrakharMishra...</a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li class="active"><a href="bot.html">AskBot</a></li>
+        </ul>
+    </nav>
+
+    <!-- Spacer to create gap between navbar and form -->
+    <div class="spacer"></div>
+
+    <!-- Contact Form -->
+    <div class="form-container" style="margin-top: 100px;">
+        <form name="submit-to-google-sheet">
+            <input name="Name" type="text" placeholder="Your Name" required>
+            <input name="Email" type="email" placeholder="Your Email" required>
+            <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+            <button type="submit" class="button">Submit</button>
+        </form>
+
+        <div class="loading js-loading is-hidden">
+            <div class="loading-spinner">
+                <svg><circle cx="25" cy="25" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg>
+            </div>
+        </div>
+
+        <p class="js-success-message is-hidden">Success!</p>
+        <p class="js-error-message is-hidden">Error!</p>
+    </div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxyALojIPJGYJEQGsrOCek6HOIGNwYclSG-NxoTbLvFxZlbGS3f28T7_vnj_p-D7L9a/exec';
+        const form = document.forms['submit-to-google-sheet'];
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => console.log('Success!', response))
+                .catch(error => console.error('Error!', error.message));
+        });
+    </script>
+
+</body>
+</html>
